@@ -1,0 +1,51 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.faq-section {
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.question {
+    cursor: pointer;
+}
+
+.answer {
+    display: none;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.faq-item .answer {
+    display: none;
+}
+
+.faq-item .answer.show {
+    display: block;
+}

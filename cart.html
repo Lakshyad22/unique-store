@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #cart-items {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slide-up 0.5s ease-out;
+        }
+        #cart-items h1 {
+            text-align: center;
+            color: #333;
+        }
+        .product-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease-out;
+        }
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        .product-info {
+            display: flex;
+            align-items: center;
+        }
+        .product-info img {
+            width: 80px;
+            height: auto;
+            margin-right: 20px;
+        }
+        .product-info p {
+            margin: 0;
+        }
+        .empty-cart {
+            text-align: center;
+            color: #777;
+        }
+
+        /* Animation */
+        @keyframes slide-up {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="cart-items">
+        <h1>Shopping Cart</h1>
+        <div id="cart-list"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsElement = document.getElementById('cart-list');
+            const storedCart = localStorage.getItem('cart');
+            if (storedCart) {
+                const cart = JSON.parse(storedCart);
+                if (cart.length > 0) {
+                    cart.forEach(product => {
+                        const productElement = document.createElement('div');
+                        productElement.classList.add('product-item');
+                        productElement.innerHTML = `
+                            <div class="product-info">
+                                <img src="${product.image}" alt="${product.name}">
+                                <p>${product.name}</p>
+                            </div>
+                            <p>${product.price}</p>
+                        `;
+                        cartItemsElement.appendChild(productElement);
+                    });
+                } else {
+                    const emptyCartMessage = document.createElement('p');
+                    emptyCartMessage.classList.add('empty-cart');
+                    emptyCartMessage.textContent = 'Your cart is empty.';
+                    cartItemsElement.appendChild(emptyCartMessage);
+                }
+            } else {
+                const emptyCartMessage = document.createElement('p');
+                emptyCartMessage.classList.add('empty-cart');
+                emptyCartMessage.textContent = 'Your cart is empty.';
+                cartItemsElement.appendChild(emptyCartMessage);
+            }
+        });
+    </script>
+</body>
+</html>
